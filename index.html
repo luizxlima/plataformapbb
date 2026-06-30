@@ -219,8 +219,12 @@
         Parabéns! Você ganhou a <span style="background: var(--cta-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Bolsa de Estudos</span>
       </h1>
       
-      <video src="img_4402-540p.mp4" autoplay muted loop playsinline class="video-placeholder" style="object-fit: cover; border: 1px solid var(--border); background: #000; box-shadow: 0 15px 35px rgba(216, 141, 7, 0.2);">
-      </video>
+      <div class="video-container" style="position: relative; margin: 5px auto 10px; width: fit-content; max-width: 100%; display: flex; justify-content: center; cursor: pointer;">
+        <video id="hero-video" src="img_4402-540p.mp4" autoplay muted loop playsinline class="video-placeholder" style="object-fit: cover; border: 1px solid var(--border); background: #000; box-shadow: 0 15px 35px rgba(216, 141, 7, 0.2); margin: 0;"></video>
+        <div id="unmute-btn" style="position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.6); color: #fff; padding: 8px 14px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); transition: opacity 0.3s ease;">
+          <i class='bx bx-volume-mute' style="font-size: 1.2rem;"></i> Toque para ouvir
+        </div>
+      </div>
 
       <a href="https://projetobrasilbilingue.com.br/pay-pbb/?utm_source=emailplataformaluiz" class="btn-gold" style="margin-bottom: 15px;">
         Quero Minha Bolsa Agora! <i class='bx bx-right-arrow-alt'></i>
@@ -329,5 +333,24 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('hero-video');
+      const unmuteBtn = document.getElementById('unmute-btn');
+      const container = document.querySelector('.video-container');
+      
+      container.addEventListener('click', function() {
+        if(video.muted) {
+          video.muted = false;
+          unmuteBtn.style.opacity = '0';
+          setTimeout(() => unmuteBtn.style.display = 'none', 300);
+        } else {
+          video.muted = true;
+          unmuteBtn.style.display = 'flex';
+          setTimeout(() => unmuteBtn.style.opacity = '1', 10);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
