@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma Pay – Projeto Brasil Bilíngue – SEDA College</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg:            #020b14;
+      --bg-darker:     #01060c;
+      --bg-light:      #051525;
+      --bg-card:       rgba(255, 255, 255, 0.03);
+      --bg-card-hover: rgba(255, 255, 255, 0.06);
+      --bg-glass:      rgba(5, 21, 37, 0.6);
+      
+      --cta:           #D88D07;
+      --cta-gradient:  linear-gradient(135deg, #E29E1A 0%, #B27302 100%);
+      --cta2:          #FDD601;
+      --green:         #00E676;
+      --green-glow:    rgba(0, 230, 118, 0.15);
+      
+      --text:          #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.75);
+      --text-muted:     rgba(255, 255, 255, 0.45);
+      --border:        rgba(255, 255, 255, 0.1);
+      --border-hover:  rgba(255, 255, 255, 0.2);
+      
+      --font:          'Poppins', sans-serif;
+      --gold:          #D88D07;
+      --red:           #FF5252;
+      --shadow:        0 15px 35px rgba(0, 0, 0, 0.4);
+      --transition:    all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+    
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.22); }
+
+    .section { padding: 80px 0; position: relative; overflow: hidden; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+    
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+    }
+    .section-title span {
+      background: var(--cta-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--cta2);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    
+    .divider { width: 60px; height: 3px; background: var(--cta-gradient); margin: 0 auto 45px; border-radius: 99px; }
+
+    .btn-gold {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 36px; background: var(--cta-gradient); color: #fff;
+      border: none; border-radius: 12px; cursor: pointer;
+      font-family: var(--font); font-size: 1.1rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      box-shadow: 0 6px 20px rgba(216, 141, 7, 0.35); transition: var(--transition);
+      text-decoration: none; position: relative; overflow: hidden;
+      width: 100%; max-width: 400px; margin: 0 auto;
+    }
+    .btn-gold::after {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transform: rotate(45deg); transition: all 0.6s ease; pointer-events: none;
+    }
+    .btn-gold:hover::after { left: 120%; }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(216, 141, 7, 0.55); filter: brightness(1.1); color: #fff; }
+
+    /* Hero */
+    .hero {
+      min-height: 80vh;
+      background: radial-gradient(circle at 80% 20%, rgba(3, 75, 93, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(13, 60, 72, 0.4) 0%, transparent 60%),
+                  var(--bg);
+      display: flex; align-items: center; padding: 100px 0 60px; position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .hero-content {
+      text-align: center; max-width: 800px; margin: 0 auto;
+    }
+    .logo-img { max-width: 250px; margin-bottom: 30px; }
+    .video-placeholder {
+      width: 100%; aspect-ratio: 9/16; max-width: 360px; background: var(--bg-light); border-radius: 16px;
+      border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+      margin: 30px auto; box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .video-placeholder i { font-size: 4rem; color: var(--cta); opacity: 0.8; }
+    
+    .hero-badges { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+    .badge {
+      display: flex; align-items: center; gap: 8px; padding: 10px 16px;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.9rem; font-weight: 600; color: var(--text-secondary);
+    }
+    .badge i { color: var(--cta); font-size: 1.2rem; }
+
+    /* Features List */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+      margin-top: 40px;
+    }
+    .feature-item {
+      display: flex; align-items: center; gap: 12px; padding: 20px;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      transition: var(--transition);
+    }
+    .feature-item:hover { background: var(--bg-card-hover); transform: translateY(-3px); border-color: var(--border-hover); }
+    .feature-item i { color: var(--green); font-size: 1.5rem; }
+    .feature-item span { font-weight: 600; font-size: 1rem; }
+
+    /* Pricing Card */
+    .pricing-card {
+      background: var(--bg-light); border: 2px solid var(--cta); border-radius: 20px;
+      padding: 40px; max-width: 600px; margin: 0 auto; text-align: center; position: relative;
+      box-shadow: 0 0 40px rgba(216, 141, 7, 0.15);
+    }
+    .pricing-card::before {
+      content: 'OFERTA ESPECIAL'; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+      background: var(--cta-gradient); color: #fff; padding: 6px 20px; border-radius: 20px;
+      font-weight: 800; font-size: 0.8rem; letter-spacing: 1px;
+    }
+    .price-title { font-size: 2rem; font-weight: 900; margin-bottom: 15px; color: var(--text); }
+    .secure-checkout { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0; color: var(--green); font-weight: 600; font-size: 0.9rem; }
+    
+    .checklist-compact { list-style: none; text-align: left; margin: 30px 0; }
+    .checklist-compact li { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.95rem; color: var(--text-secondary); }
+    .checklist-compact li i { color: var(--green); }
+
+    /* Guarantee */
+    .guarantee-wrap {
+      display: flex; align-items: center; gap: 30px; background: var(--bg-light);
+      padding: 40px; border-radius: 20px; border: 1px solid var(--border);
+      max-width: 800px; margin: 0 auto;
+    }
+    .guarantee-icon { font-size: 5rem; color: var(--cta); flex-shrink: 0; }
+    .guarantee-text h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+    .guarantee-text p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px; }
+
+    /* Testimonials */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 40px; }
+    .testimonial-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 30px;
+    }
+    .stars { color: #FFB400; margin-bottom: 15px; font-size: 1.2rem; }
+
+    footer { background: var(--bg-darker); padding: 40px 0; text-align: center; border-top: 1px solid var(--border); }
+    footer p { color: var(--text-muted); font-size: 0.85rem; }
+    footer a { color: var(--text-muted); text-decoration: underline; transition: var(--transition); }
+    footer a:hover { color: var(--cta); }
+    
+    @media (max-width: 768px) {
+      .hero { padding: 10px 0 20px; min-height: 100svh; display: flex; align-items: flex-start; justify-content: center; }
+      .hero-badges { gap: 6px; margin-bottom: 12px; margin-top: 10px; }
+      .hero-badges .badge { font-size: 0.65rem; padding: 4px 8px; }
+      .hero-content h1 { font-size: 1.4rem !important; margin-bottom: 5px !important; }
+      .hero-content p { font-size: 0.85rem !important; margin-bottom: 10px !important; line-height: 1.25; }
+      .video-placeholder { margin: 8px auto 12px; height: 60vh; max-height: 550px; width: auto; aspect-ratio: 9/16; border-radius: 12px; }
+      .btn-gold { padding: 14px 10px; font-size: 0.95rem; width: 100%; }
+      .guarantee-wrap { flex-direction: column; text-align: center; padding: 30px 20px; }
+      .pricing-card { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <!-- Placeholder for Logo -->
+      <!-- <img src="logo.png" alt="Projeto Brasil Bilíngue" class="logo-img"> -->
+      
+      <div class="hero-badges">
+        <div class="badge"><i class='bx bxs-check-circle' style="color: var(--green);"></i> Aprovado no PBB</div>
+        <div class="badge"><i class='bx bx-certification'></i> Certificado Reconhecido Internacionalmente</div>
+      </div>
+      
+      <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.2; margin-bottom: 15px; color: #fff; text-transform: uppercase; letter-spacing: -1px;">
+        Parabéns! Você ganhou a <span style="background: var(--cta-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Bolsa de Estudos</span>
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px; font-weight: 500;">
+        Sua vaga no Projeto Brasil Bilíngue está garantida. Realize agora o pagamento da taxa única de matrícula de R$ 97,00 e comece suas aulas imediatamente.
+      </p>
+      
+      <video src="img_4402-540p.mp4" autoplay muted loop playsinline class="video-placeholder" style="object-fit: cover; border: 1px solid var(--border); background: #000; box-shadow: 0 15px 35px rgba(216, 141, 7, 0.2);">
+      </video>
+
+      <a href="https://projetobrasilbilingue.com.br/pay-pbb/?utm_source=emailplataformaluiz" class="btn-gold">
+        Quero Minha Bolsa Agora! <i class='bx bx-right-arrow-alt'></i>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg-darker);">
+    <div class="container">
+      <div class="section-subtitle">Benefícios</div>
+      <h2 class="section-title">Agora é a hora de <span>realmente aprender inglês!</span></h2>
+      <div class="divider"></div>
+      
+      <div class="features-grid">
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Do Zero à Fluência</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Curso completo com 6 níveis</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Aulas 100% online e 24/7</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Metodologia SEDA College</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Certificados em cada nível</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Material didático gratuito</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Plataforma com videoaulas</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Suporte acadêmico contínuo</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Testes e exercícios práticos</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Inglês para viagens e negócios</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Desenvolvimento da conversação</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Técnicas de aprendizado rápido</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Simulações do dia a dia</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Conteúdos exclusivos e atualizados</span></div>
+        <div class="feature-item"><i class='bx bx-check'></i> <span>Fórum de alunos ativa</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="pricing-card">
+        <h2 class="price-title">TAXA ÚNICA DE MATRÍCULA</h2>
+        <div class="price-value" style="font-size: 3.5rem; font-weight: 900; color: var(--cta); margin: 20px 0; line-height: 1; text-shadow: 0 4px 15px rgba(216, 141, 7, 0.2);">
+          <span style="font-size: 1.5rem; vertical-align: top; position: relative; top: 10px;">R$</span> 97<span style="font-size: 1.5rem;">,00</span>
+        </div>
+        
+        <a href="https://projetobrasilbilingue.com.br/pay-pbb/?utm_source=emailplataformaluiz" class="btn-gold" style="width: 100%;">
+          Quero Minha Bolsa Agora!
+        </a>
+        
+        <div class="secure-checkout">
+          <i class='bx bxs-lock-alt'></i> Compra 100% segura! Receba seu acesso imediatamente.
+        </div>
+        
+        <ul class="checklist-compact">
+          <li><i class='bx bxs-check-circle'></i> Do Zero à Fluência</li>
+          <li><i class='bx bxs-check-circle'></i> Curso completo com 6 níveis</li>
+          <li><i class='bx bxs-check-circle'></i> Metodologia SEDA College</li>
+          <li><i class='bx bxs-check-circle'></i> Certificados em cada nível</li>
+          <li><i class='bx bxs-check-circle'></i> Suporte acadêmico contínuo</li>
+          <li><i class='bx bxs-check-circle'></i> Acesso 24/7</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg-darker);">
+    <div class="container">
+      <h2 class="section-title">Centenas de resultados, <span>seja você o próximo:</span></h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px;">Comentários reais da nossa plataforma.</p>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Excelente plataforma! A metodologia da SEDA College realmente funciona."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Consegui meu certificado e já sinto diferença nas entrevistas de emprego."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"As aulas são diretas e o material didático é muito completo. Recomendo muito!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="guarantee-wrap">
+        <i class='bx bx-shield-quarter guarantee-icon'></i>
+        <div class="guarantee-text">
+          <h3>Risco zero com 7 dias de garantia</h3>
+          <p>Ao entrar no Projeto Brasil Bilíngue, você terá acesso imediato à plataforma exclusiva de alunos e à nossa comunidade oficial. Se não estiver satisfeito, poderá solicitar o reembolso total em até 7 dias, sem complicações.</p>
+          <a href="https://projetobrasilbilingue.com.br/pay-pbb/?utm_source=emailplataformaluiz" class="btn-gold">
+            Garantir Minha Vaga <i class='bx bx-check-shield'></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Projeto Brasil Bilíngue - Todos os direitos reservados. | <a href="#">Regulamento</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
