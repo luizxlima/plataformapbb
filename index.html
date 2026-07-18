@@ -350,6 +350,25 @@
           setTimeout(() => unmuteBtn.style.opacity = '1', 10);
         }
       });
+
+      // Repassar parâmetros UTM e de rastreio para os links de checkout
+      const urlParams = window.location.search;
+      if (urlParams) {
+        const buttons = document.querySelectorAll('a.btn-gold');
+        const currentParams = new URLSearchParams(urlParams);
+        
+        buttons.forEach(button => {
+          try {
+            const currentUrl = new URL(button.href);
+            for (const [key, value] of currentParams) {
+              currentUrl.searchParams.set(key, value);
+            }
+            button.href = currentUrl.toString();
+          } catch (e) {
+            console.error('Erro ao atualizar URL do botão:', e);
+          }
+        });
+      }
     });
   </script>
 </body>
